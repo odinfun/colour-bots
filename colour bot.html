@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future of Colour Bots | RoboFuture</title>
+    <style>
+        :root {
+            --primary-color: #00f7ff;
+            --secondary-color: #ff00aa;
+            --dark-bg: #0a0a1a;
+            --darker-bg: #050510;
+            --text-color: #e0e0ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', 'Arial', sans-serif;
+        }
+        
+        @font-face {
+            font-family: 'Orbitron';
+            src: url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 247, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 170, 0.1) 0%, transparent 20%);
+        }
+        
+        header {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--darker-bg), var(--dark-bg));
+            z-index: -1;
+        }
+        
+        .header-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                linear-gradient(var(--primary-color), transparent),
+                linear-gradient(90deg, var(--secondary-color), transparent);
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            padding: 0.5rem 0;
+            position: relative;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+        }
+        
+        .bot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .bot-card {
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            border: 1px solid rgba(0, 247, 255, 0.1);
+        }
+        
+        .bot-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 247, 255, 0.2);
+            border-color: rgba(0, 247, 255, 0.3);
+        }
+        
+        .bot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 247, 255, 0.1), rgba(255, 0, 170, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+        
+        .bot-card:hover::before {
+            opacity: 1;
+        }
+        
+        .bot-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(0, 247, 255, 0.1);
+        }
+        
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        /* X (Twitter) contact button */
+        .x-contact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+            font-weight: bold;
+        }
+        
+        .x-contact:hover {
+            background: #000000;
+            transform: translateY(-3px);
+            color: white;
+        }
+        
+        /* Meme culture section */
+        .meme-culture {
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(0, 247, 255, 0.1);
+        }
+        
+        .meme-culture h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .meme-culture p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .nft-features {
+            margin-top: 2rem;
+        }
+        
+        .nft-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .nft-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .nft-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .bot-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            nav a {
+                margin: 0 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero {
+                height: 60vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .bot-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                margin: 0.5rem 0;
+            }
+            
+            .hero {
+                height: 80vh;
+            }
+        }
+        
+        /* Animation effects */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <h1>ROBO<span class="glow">FUTURE</span></h1>
+        <p class="tagline">Exploring the infinite possibilities of Colour Bot technology</p>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#bots">Colour Bots</a>
+            <a href="#meme-culture">Colour Bot Memes</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-robot-putting-together-a-computer-12251-large.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h2>Welcome to the Future of <span class="glow">Colour Bots</span></h2>
+            <p>We are committed to continuously releasing the latest Colour Bots, starting from ODIN.FUN, and promoting NFTs to make Colour Bots popular. </p>
+            <div>
+                <a href="https://x.com/Colour_Bots" class="x-contact">X</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="bots">
+            <h2 class="section-title">Colour Bot <span class="glow">Collection</span></h2>
+            <p>Discover our latest Colour Bot series, each meticulously designed to showcase different color styles.</p>
+            
+            <div class="bot-grid">
+                <!-- Colour Bot card 1 -->
+                <div class="bot-card floating">
+                    <img src="bot1.gif" alt="Industrial Colour Bot" class="bot-img">
+                </div>
+                
+                <!-- Colour Bot card 2 -->
+                <div class="bot-card floating">
+                    <img src="bot2.gif" alt="Medical Colour Bot" class="bot-img">
+                </div>
+                
+                <!-- Colour Bot card 3 -->
+                <div class="bot-card floating">
+                    <img src="bot3.gif" alt="Service Colour Bot" class="bot-img">
+                </div>
+                
+                <!-- Colour Bot card 4 -->
+                <div class="bot-card floating">
+                    <img src="bot4.gif" alt="Educational Colour Bot" class="bot-img">
+                </div>
+                
+                <!-- Colour Bot card 5 -->
+                <div class="bot-card floating">
+                    <img src="bot5.gif" alt="Security Colour Bot" class="bot-img">
+                </div>
+                
+                <!-- Colour Bot card 6 -->
+                <div class="bot-card floating">
+                    <img src="bot6.gif" alt="Entertainment Colour Bot" class="bot-img">
+                </div>
+               <!-- Colour Bot card 7 -->
+                <div class="bot-card floating">
+                    <img src="bot7.gif" alt="Entertainment Colour Bot" class="bot-img">
+                </div>
+		<!-- Colour Bot card 8 -->
+                <div class="bot-card floating">
+                    <img src="bot8.gif" alt="Entertainment Colour Bot" class="bot-img">
+                </div>
+		<!-- Colour Bot card 9 -->
+                <div class="bot-card floating">
+                    <img src="bot9.gif" alt="Entertainment Colour Bot" class="bot-img">
+                </div>
+            </div>
+        </section>
+
+        <section id="meme-culture" class="meme-culture">
+            <h3>Colour Bot Meme Culture & NFT Project</h3>
+            <p>We're launching a revolutionary Colour Bot NFT collection that perfectly blends digital art with blockchain technology. Each Colour Bot will be designed as a unique NFT with immutable cryptographic code permanently stored on the blockchain.</p>
+            
+            <div class="nft-features">
+                <div class="nft-feature">
+                    <div class="nft-icon">✦</div>
+                    <div class="nft-content">
+                        <h4>Unique Digital Assets</h4>
+                        <p>Each Colour Bot NFT features distinctive trait combinations including rarity, accessories, and special abilities. Smart contracts ensure their scarcity and authenticity, making every collectible a true digital treasure.</p>
+                    </div>
+                </div>
+                
+                <div class="nft-feature">
+                    <div class="nft-icon">✦</div>
+                    <div class="nft-content">
+                        <h4>Versatile Applications</h4>
+                        <p>NFT holders can display their collections in virtual galleries, participate in metaverse exhibitions, or use them as digital identity symbols. Premium NFTs will unlock priority access to physical Colour Bots and customization services.</p>
+                    </div>
+                </div>
+                
+                <div class="nft-feature">
+                    <div class="nft-icon">✦</div>
+                    <div class="nft-content">
+                        <h4>Creator Economy Ecosystem</h4>
+                        <p>We've established a comprehensive licensing system for derivative works, allowing holders to create and monetize art based on their NFTs. The platform provides tools to make creative monetization easier.</p>
+                    </div>
+                </div>
+                
+                <div class="nft-feature">
+                    <div class="nft-icon">✦</div>
+                    <div class="nft-content">
+                        <h4>Community Governance & Benefits</h4>
+                        <p>NFT holders will form a DAO governance community to vote on project development directions. Regular airdrops, exclusive event invitations, and limited merchandise will be special perks for holders.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p>These Colour Bot meme NFTs will be tradable on major digital art platforms. Leveraging the viral nature of memes and the scarcity value of NFTs, we're creating a new paradigm in digital culture. The first limited edition NFTs will be released soon - stay tuned for this fusion of technology and art that will revolutionize the digital space.</p>
+        </section>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Scroll animation
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const floatingElements = document.querySelectorAll('.floating');
+            
+            floatingElements.forEach((element, index) => {
+                // Adjust animation delay based on scroll position and element position
+                const elementPosition = element.getBoundingClientRect().top;
+                const delay = (elementPosition + index * 100) / 1000;
+                
+                element.style.animationDelay = `${delay}s`;
+            });
+        });
+    </script>
+</body>
+</html>
